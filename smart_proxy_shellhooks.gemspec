@@ -13,4 +13,5 @@ Gem::Specification.new do |s|
   s.files = Dir['{lib,settings.d,bundler.d,examples}/**/*'] + s.extra_rdoc_files
   s.homepage = 'http://github.com/theforeman/smart_proxy_shellhooks'
   s.license = 'GPL-3.0-or-later'
+  s.required_ruby_version = '>= 3.0'
 end

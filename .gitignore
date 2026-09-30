@@ -1,2 +1,7 @@
 smart_proxy_shellhooks-*.gem
 /.idea
+/Gemfile.lock
+/.bundle
+/.vendor
+/logs
+.ruby-version*

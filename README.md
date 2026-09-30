@@ -2,6 +2,17 @@
 
 Provides an endpoint for foreman_webhooks plugin executing binaries (shell scripts, python scripts, anything).
 
+## Running tests
+
+Install the test dependencies and run the suite:
+
+    bundle install
+    bundle exec rake test
+
+`bundle exec rake` also runs the tests. The test bundle uses Smart Proxy's
+`develop` branch by default; set `SMART_PROXY_BRANCH` to test against another
+branch. CI uses Foreman's shared Smart Proxy plugin workflow.
+
 ## Installation
 
 Install the plugin using the foreman-installer. Never enable this service via HTTP endpoint, only HTTPS with authentication using client certificate and with trusted hosts should be used.
