@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'rack/rewindable_input'
 require 'smart_proxy_shellhooks/shellhooks'
 
 module Proxy::ShellHooks
@@ -7,6 +8,9 @@ module Proxy::ShellHooks
   class Api < ::Sinatra::Base
     include ::Proxy::Log
     helpers ::Proxy::Helpers
+
+    # Rack 3 inputs need buffering so parameter parsing does not consume the payload.
+    use Rack::RewindableInput::Middleware if defined?(Rack::RewindableInput::Middleware)
 
     authorize_with_ssl_client
     authorize_with_trusted_hosts
@@ -39,6 +43,7 @@ module Proxy::ShellHooks
           break
         end
       end
+      # Sinatra may have already read the body while parsing form parameters.
       request.body.rewind
       Proxy::Util::CommandTask.new(cmd, request.body.read).start
     end
